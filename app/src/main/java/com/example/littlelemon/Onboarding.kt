@@ -1,18 +1,17 @@
 package com.example.littlelemon
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Button
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
-import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -37,13 +36,20 @@ fun OnBoarding() {
         mutableStateOf(TextFieldValue(""))
     }
 
+    var password by remember {
+        mutableStateOf(TextFieldValue(""))
+    }
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth(),
     ) {
+        Spacer(modifier = Modifier.height(20.dp))
         Image(
             painter = painterResource(id = R.drawable.little_lemon_logo),
             contentDescription = "Logo Image",
+            modifier = Modifier.width(200.dp),
+            contentScale = ContentScale.Fit
         )
         Spacer(modifier = Modifier.height(30.dp))
         Box(
@@ -119,9 +125,34 @@ fun OnBoarding() {
                     .fillMaxWidth(),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
             )
+            Spacer(modifier = Modifier.height(15.dp))
+            OutlinedTextField(
+                value = password,
+                onValueChange = {
+                    password = it
+                },
+                label = {Text(text = "Password")},
+                placeholder = { Text(text = "*********")},
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    focusedBorderColor = colorResource(id = R.color.green),
+                    focusedLabelColor = colorResource(id = R.color.green)
+                ),
+                modifier = Modifier
+                    .fillMaxWidth(),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
+            )
         }
-        Button(onClick = { /*TODO*/ }) {
-            Text(text = "Register")
+        Spacer(modifier = Modifier.height(30.dp))
+        Button(
+            onClick = { /*TODO*/ },
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = colorResource(id = R.color.yellow),
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp),
+            ) {
+            Text(text = "Register", fontSize = 18.sp)
         }
     }
 }
