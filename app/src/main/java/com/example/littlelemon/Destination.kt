@@ -8,6 +8,6 @@ object Home: Destination {
     override val route: String = "Home"
 }
 
-object Project: Destination {
+object Profile: Destination {
     override val route: String = "Profile"
 }
