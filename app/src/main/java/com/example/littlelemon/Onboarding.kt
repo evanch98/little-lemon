@@ -15,12 +15,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
@@ -35,19 +37,19 @@ fun OnBoarding(navController: NavController) {
     }
 
     var firstName by remember {
-        mutableStateOf(TextFieldValue(""))
+        mutableStateOf("")
     }
 
     var lastName by remember {
-        mutableStateOf(TextFieldValue(""))
+        mutableStateOf("")
     }
 
     var email by remember {
-        mutableStateOf(TextFieldValue(""))
+        mutableStateOf("")
     }
 
     var password by remember {
-        mutableStateOf(TextFieldValue(""))
+        mutableStateOf("")
     }
 
     Column(
@@ -149,13 +151,23 @@ fun OnBoarding(navController: NavController) {
                 ),
                 modifier = Modifier
                     .fillMaxWidth(),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
+                visualTransformation = PasswordVisualTransformation(),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
             )
         }
         Spacer(modifier = Modifier.height(30.dp))
         Button(
             onClick = {
                 showSnackBar = true
+                snackBarMessage = if (firstName.isBlank() ||
+                    lastName.isBlank() ||
+                    email.isBlank() ||
+                    password.isBlank()
+                ) {
+                    "Registration unsuccessful. Please enter all data."
+                } else {
+                    "Registration successful!"
+                }
             },
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = colorResource(id = R.color.yellow),
@@ -168,6 +180,10 @@ fun OnBoarding(navController: NavController) {
         }
         if (showSnackBar) {
             SnackBar(message = snackBarMessage)
+            LaunchedEffect(Unit) {
+                delay(2000)
+                showSnackBar = false
+            }
         }
     }
 }
