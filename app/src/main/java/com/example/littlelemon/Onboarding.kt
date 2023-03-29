@@ -21,9 +21,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import kotlinx.coroutines.launch
 
 @Composable
 fun OnBoarding(navController: NavController) {
+
+    var showSnackBar by remember {
+        mutableStateOf(false)
+    }
+
+    var snackBarMessage by remember {
+        mutableStateOf("")
+    }
 
     var firstName by remember {
         mutableStateOf(TextFieldValue(""))
@@ -84,10 +93,10 @@ fun OnBoarding(navController: NavController) {
             OutlinedTextField(
                 value = firstName,
                 onValueChange = {
-                firstName = it
-            },
-                label = {Text(text = "First Name")},
-                placeholder = { Text(text = "Bob")},
+                    firstName = it
+                },
+                label = { Text(text = "First Name") },
+                placeholder = { Text(text = "Bob") },
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     focusedBorderColor = colorResource(id = R.color.green),
                     focusedLabelColor = colorResource(id = R.color.green)
@@ -101,8 +110,8 @@ fun OnBoarding(navController: NavController) {
                 onValueChange = {
                     lastName = it
                 },
-                label = {Text(text = "Last Name")},
-                placeholder = { Text(text = "Doe")},
+                label = { Text(text = "Last Name") },
+                placeholder = { Text(text = "Doe") },
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     focusedBorderColor = colorResource(id = R.color.green),
                     focusedLabelColor = colorResource(id = R.color.green)
@@ -116,8 +125,8 @@ fun OnBoarding(navController: NavController) {
                 onValueChange = {
                     email = it
                 },
-                label = {Text(text = "Email")},
-                placeholder = { Text(text = "bobdoe@email.com")},
+                label = { Text(text = "Email") },
+                placeholder = { Text(text = "bobdoe@email.com") },
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     focusedBorderColor = colorResource(id = R.color.green),
                     focusedLabelColor = colorResource(id = R.color.green)
@@ -132,8 +141,8 @@ fun OnBoarding(navController: NavController) {
                 onValueChange = {
                     password = it
                 },
-                label = {Text(text = "Password")},
-                placeholder = { Text(text = "*********")},
+                label = { Text(text = "Password") },
+                placeholder = { Text(text = "*********") },
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     focusedBorderColor = colorResource(id = R.color.green),
                     focusedLabelColor = colorResource(id = R.color.green)
@@ -145,15 +154,20 @@ fun OnBoarding(navController: NavController) {
         }
         Spacer(modifier = Modifier.height(30.dp))
         Button(
-            onClick = { /*TODO*/ },
+            onClick = {
+                showSnackBar = true
+            },
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = colorResource(id = R.color.yellow),
             ),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp),
-            ) {
+        ) {
             Text(text = "Register", fontSize = 18.sp)
+        }
+        if (showSnackBar) {
+            SnackBar(message = snackBarMessage)
         }
     }
 }
