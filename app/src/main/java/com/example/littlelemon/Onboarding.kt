@@ -173,6 +173,7 @@ fun OnBoarding(navController: NavController) {
                     sharedPreferences.edit().putString("email", email).apply()
                     sharedPreferences.edit().putString("password", password).apply()
                     sharedPreferences.edit().putBoolean("loggedIn", true).apply()
+                    navController.navigate(Home.route)
                     "Registration successful!"
                 }
             },
