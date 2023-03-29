@@ -1,5 +1,7 @@
 package com.example.littlelemon
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -10,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -22,6 +25,10 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun OnBoarding(navController: NavController) {
+
+    val sharedPreferences =
+        LocalContext.current.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+
 
     var showSnackBar by remember {
         mutableStateOf(false)
@@ -161,6 +168,11 @@ fun OnBoarding(navController: NavController) {
                 ) {
                     "Registration unsuccessful. Please enter all data."
                 } else {
+                    sharedPreferences.edit().putString("firstName", firstName).apply()
+                    sharedPreferences.edit().putString("lastName", lastName).apply()
+                    sharedPreferences.edit().putString("email", email).apply()
+                    sharedPreferences.edit().putString("password", password).apply()
+                    sharedPreferences.edit().putBoolean("loggedIn", true).apply()
                     "Registration successful!"
                 }
             },
