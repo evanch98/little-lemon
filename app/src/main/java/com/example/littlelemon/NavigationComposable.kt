@@ -7,7 +7,10 @@ import androidx.navigation.compose.composable
 
 @Composable
 fun Navigation(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = Home.route) {
+    NavHost(navController = navController, startDestination = OnBoarding.route) {
+        composable(OnBoarding.route) {
+            OnBoarding(navController)
+        }
         composable(Home.route) {
 
         }

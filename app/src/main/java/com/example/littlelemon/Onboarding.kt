@@ -20,9 +20,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 @Composable
-fun OnBoarding() {
+fun OnBoarding(navController: NavController) {
 
     var firstName by remember {
         mutableStateOf(TextFieldValue(""))
@@ -155,10 +156,4 @@ fun OnBoarding() {
             Text(text = "Register", fontSize = 18.sp)
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun OnBoardingPreview() {
-    OnBoarding()
 }
