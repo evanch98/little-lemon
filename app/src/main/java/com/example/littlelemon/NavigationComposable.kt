@@ -13,7 +13,7 @@ fun Navigation(navController: NavHostController) {
     val sharedPreferences =
         LocalContext.current.getSharedPreferences("UserData", Context.MODE_PRIVATE)
 
-    var isLoggedIn = sharedPreferences.getBoolean("loggedIn", false)
+    val isLoggedIn = sharedPreferences.getBoolean("loggedIn", false)
 
     NavHost(
         navController = navController,
