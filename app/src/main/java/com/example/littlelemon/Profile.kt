@@ -18,10 +18,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
-@Preview(showBackground = true)
 @Composable
-fun Profile() {
+fun Profile(navController: NavController) {
 
     val sharedPreferences = LocalContext.current.getSharedPreferences(
         "UserData", Context.MODE_PRIVATE
@@ -95,7 +95,8 @@ fun Profile() {
         Spacer(modifier = Modifier.height(20.dp))
         Button(
             onClick = {
-
+                      sharedPreferences.edit().remove("UserData").apply()
+                navController.navigate(OnBoarding.route)
             },
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = colorResource(id = R.color.yellow),
