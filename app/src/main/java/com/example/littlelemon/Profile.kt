@@ -95,7 +95,8 @@ fun Profile(navController: NavController) {
         Spacer(modifier = Modifier.height(20.dp))
         Button(
             onClick = {
-                      sharedPreferences.edit().remove("UserData").apply()
+                // This will remove the user data stored in the sharedPreferences
+                sharedPreferences.edit().remove("UserData").apply()
                 navController.navigate(OnBoarding.route)
             },
             colors = ButtonDefaults.buttonColors(
