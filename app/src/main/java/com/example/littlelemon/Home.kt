@@ -22,17 +22,31 @@ fun Home(navController: NavController) {
         verticalArrangement = Arrangement.Top
     ) {
         Spacer(modifier = Modifier.height(20.dp))
-        Image(
-            painter = painterResource(id = R.drawable.little_lemon_logo),
-            contentDescription = "Logo Image",
-            modifier = Modifier.width(200.dp),
-            contentScale = ContentScale.Fit
-        )
-        Spacer(modifier = Modifier.height(20.dp))
-        Image(
-            painter = painterResource(id = R.drawable.profile_pic),
-            contentDescription = "Profile Picture",
-            modifier =  Modifier.clickable { navController.navigate(Profile.route) }
-        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp) // to create space between the two images
+        ) {
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier.weight(1f)  // the weight for the box
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.little_lemon_logo),
+                    contentDescription = "Logo Image",
+                    contentScale = ContentScale.Fit,
+                    modifier = Modifier.width(200.dp)
+                )
+            }
+            Image(
+                painter = painterResource(id = R.drawable.profile_pic),
+                contentDescription = "Profile Picture",
+                modifier = Modifier
+                    .width(50.dp)
+                    .clickable { navController.navigate(Profile.route) },
+            )
+        }
     }
 }
