@@ -97,9 +97,10 @@ fun Home(navController: NavController) {
                         painter = painterResource(id = R.drawable.hero_image),
                         contentDescription = "Hero Image",
                         modifier = Modifier
-                            .width(140.dp)
+                            .width(200.dp)
+                            .aspectRatio(16f/20f)  // set the aspectRatio to 16:20
                             .clip(RoundedCornerShape(16.dp)),
-                        contentScale = ContentScale.Fit
+                        contentScale = ContentScale.FillBounds  // fill the bounds of the container
                     )
                 }
                 Spacer(modifier = Modifier.height(20.dp))
