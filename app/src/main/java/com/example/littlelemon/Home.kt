@@ -4,15 +4,18 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Icon
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -21,6 +24,11 @@ import androidx.navigation.NavController
 
 @Composable
 fun Home(navController: NavController) {
+
+    var searchPhrase by remember {
+        mutableStateOf("")
+    }
+
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -88,10 +96,31 @@ fun Home(navController: NavController) {
                     Image(
                         painter = painterResource(id = R.drawable.hero_image),
                         contentDescription = "Hero Image",
-                        modifier = Modifier.width(150.dp).clip(RoundedCornerShape(16.dp)),
+                        modifier = Modifier
+                            .width(140.dp)
+                            .clip(RoundedCornerShape(16.dp)),
                         contentScale = ContentScale.Fit
                     )
                 }
+                Spacer(modifier = Modifier.height(20.dp))
+                OutlinedTextField(
+                    value = searchPhrase,
+                    onValueChange = {
+                        searchPhrase = it
+                    },
+                    leadingIcon = {
+                        Icon(
+                            imageVector = Icons.Default.Search,
+                            contentDescription = "Search Icon"
+                        )
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    placeholder = {Text(text = "Enter search phrase")},
+                    colors = TextFieldDefaults.outlinedTextFieldColors(
+                        focusedBorderColor = colorResource(id = R.color.yellow),
+                        backgroundColor = colorResource(id = R.color.light_grey)
+                    ),
+                )
             }
         }
     }
