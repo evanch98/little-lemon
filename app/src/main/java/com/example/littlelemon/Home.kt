@@ -18,6 +18,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -98,7 +99,7 @@ fun Home(navController: NavController) {
                         contentDescription = "Hero Image",
                         modifier = Modifier
                             .width(200.dp)
-                            .aspectRatio(16f/20f)  // set the aspectRatio to 16:20
+                            .aspectRatio(16f / 20f)  // set the aspectRatio to 16:20
                             .clip(RoundedCornerShape(16.dp)),
                         contentScale = ContentScale.FillBounds  // fill the bounds of the container
                     )
@@ -116,7 +117,7 @@ fun Home(navController: NavController) {
                         )
                     },
                     modifier = Modifier.fillMaxWidth(),
-                    placeholder = {Text(text = "Enter search phrase")},
+                    placeholder = { Text(text = "Enter search phrase") },
                     colors = TextFieldDefaults.outlinedTextFieldColors(
                         focusedBorderColor = colorResource(id = R.color.yellow),
                         backgroundColor = colorResource(id = R.color.light_grey)
@@ -124,5 +125,14 @@ fun Home(navController: NavController) {
                 )
             }
         }
+        Spacer(modifier = Modifier.height(30.dp))
+        Text(
+            text = "ORDER FOR DELIVERY!",
+            fontSize = 24.sp,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp),
+            textAlign = TextAlign.Left
+        )
     }
 }
