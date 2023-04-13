@@ -40,6 +40,12 @@ class MainActivity : ComponentActivity() {
             .body<MenuNetwork>()
             .menu
     }
+
+    // save menu items that are fetched from the server to the local database
+    private fun saveMenuToDatabase(menuItemNetwork: List<MenuItemNetwork>) {
+        val menuItemRoom = menuItemNetwork.map { it.toMenuItemRoom() }
+        database.menuItemDao().insertAll(*menuItemRoom.toTypedArray())
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
