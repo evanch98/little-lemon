@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
+import androidx.room.Room
 import com.example.littlelemon.ui.theme.LittleLemonTheme
 import io.ktor.client.*
 import io.ktor.client.call.*
@@ -26,6 +27,11 @@ class MainActivity : ComponentActivity() {
         install(ContentNegotiation) {
             json(contentType = ContentType("text", "plain"))
         }
+    }
+
+    // Database builder
+    private val database by lazy {
+        Room.databaseBuilder(applicationContext, AppDatabase::class.java, "database").build()
     }
 
     private suspend fun fetchMenu(): List<MenuItemNetwork> {
