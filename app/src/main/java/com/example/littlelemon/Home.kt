@@ -34,11 +34,16 @@ fun Home(navController: NavController, database: AppDatabase) {
         mutableStateOf("")
     }
 
+    var selectedCategory by remember {
+        mutableStateOf("")
+    }
+
     val categoryList = mutableListOf<String>()
     categoryList.add("Starters")
     categoryList.add("Mains")
     categoryList.add("Desserts")
     categoryList.add("Drinks")
+    categoryList.add("Remove Filter")
 
     val databaseMenuItems by database.menuItemDao().getAll().observeAsState(emptyList())
 
@@ -47,7 +52,13 @@ fun Home(navController: NavController, database: AppDatabase) {
             it.title.contains(searchPhrase, ignoreCase = true)
         }
     } else {
-        databaseMenuItems
+        if (selectedCategory.isNotEmpty()) {
+            databaseMenuItems.filter {
+                it.category == selectedCategory
+            }
+        } else {
+            databaseMenuItems
+        }
     }
 
     Column(
@@ -155,7 +166,36 @@ fun Home(navController: NavController, database: AppDatabase) {
             textAlign = TextAlign.Left
         )
         Spacer(modifier = Modifier.height(20.dp))
-        CategoryList(items = categoryList)
+        LazyRow(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp)
+        ) {
+            items(
+                items = categoryList,
+                itemContent = { category ->
+                    Row() {
+                        Box(
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(25.dp))
+                                .background(color = colorResource(id = R.color.light_grey))
+                                .clickable {
+                                    selectedCategory = category.lowercase()
+                                    if (category == "Remove Filter") {
+                                        selectedCategory = ""
+                                    }
+                                }
+                                .padding(15.dp)
+                        ) {
+                            Text(text = category, fontSize = 18.sp, fontWeight = FontWeight.Bold, color = colorResource(
+                                id = R.color.green
+                            ))
+                        }
+                        Spacer(modifier = Modifier.width(10.dp))
+                    }
+                }
+            )
+        }
         Spacer(modifier = Modifier.height(10.dp))
         Divider(modifier = Modifier.padding(horizontal = 20.dp))
         Spacer(modifier = Modifier.height(10.dp))
@@ -205,34 +245,6 @@ fun MenuItemsList(items: List<MenuItemRoom>) {
                     Spacer(modifier = Modifier.height(10.dp))
                     Divider()
                     Spacer(modifier = Modifier.height(10.dp))
-                }
-            }
-        )
-    }
-}
-
-@Composable
-fun CategoryList(items: List<String>) {
-    LazyRow(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 20.dp)
-    ) {
-        items(
-            items = items,
-            itemContent = { category ->
-                Row() {
-                    Box(
-                        modifier = Modifier
-                            .clip(RoundedCornerShape(25.dp))
-                            .background(color = colorResource(id = R.color.light_grey))
-                            .padding(15.dp)
-                    ) {
-                        Text(text = category, fontSize = 18.sp, fontWeight = FontWeight.Bold, color = colorResource(
-                            id = R.color.green
-                        ))
-                    }
-                    Spacer(modifier = Modifier.width(10.dp))
                 }
             }
         )
