@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.rememberNavController
 import androidx.room.Room
+import androidx.room.RoomDatabase
 import com.example.littlelemon.ui.theme.LittleLemonTheme
 import io.ktor.client.*
 import io.ktor.client.call.*
@@ -56,7 +57,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MyNavigation()
+                    MyNavigation(database = database)
                 }
             }
         }
@@ -70,7 +71,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MyNavigation() {
+fun MyNavigation(database: AppDatabase) {
     val navController = rememberNavController()
-    Navigation(navController = navController)
+    Navigation(navController = navController, database = database)
 }
