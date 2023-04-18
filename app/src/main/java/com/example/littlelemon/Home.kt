@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -32,6 +33,12 @@ fun Home(navController: NavController, database: AppDatabase) {
     var searchPhrase by remember {
         mutableStateOf("")
     }
+
+    val categoryList = mutableListOf<String>()
+    categoryList.add("Starters")
+    categoryList.add("Mains")
+    categoryList.add("Desserts")
+    categoryList.add("Drinks")
 
     val databaseMenuItems by database.menuItemDao().getAll().observeAsState(emptyList())
 
@@ -147,7 +154,11 @@ fun Home(navController: NavController, database: AppDatabase) {
                 .padding(horizontal = 20.dp),
             textAlign = TextAlign.Left
         )
-        Spacer(modifier = Modifier.height(30.dp))
+        Spacer(modifier = Modifier.height(20.dp))
+        CategoryList(items = categoryList)
+        Spacer(modifier = Modifier.height(10.dp))
+        Divider(modifier = Modifier.padding(horizontal = 20.dp))
+        Spacer(modifier = Modifier.height(10.dp))
         MenuItemsList(items = menuItems)
     }
 }
@@ -194,6 +205,34 @@ fun MenuItemsList(items: List<MenuItemRoom>) {
                     Spacer(modifier = Modifier.height(10.dp))
                     Divider()
                     Spacer(modifier = Modifier.height(10.dp))
+                }
+            }
+        )
+    }
+}
+
+@Composable
+fun CategoryList(items: List<String>) {
+    LazyRow(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 20.dp)
+    ) {
+        items(
+            items = items,
+            itemContent = { category ->
+                Row() {
+                    Box(
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(25.dp))
+                            .background(color = colorResource(id = R.color.light_grey))
+                            .padding(15.dp)
+                    ) {
+                        Text(text = category, fontSize = 18.sp, fontWeight = FontWeight.Bold, color = colorResource(
+                            id = R.color.green
+                        ))
+                    }
+                    Spacer(modifier = Modifier.width(10.dp))
                 }
             }
         )
