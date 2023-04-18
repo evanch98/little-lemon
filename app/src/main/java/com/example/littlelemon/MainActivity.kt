@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
 
     // Database builder
     private val database by lazy {
-        Room.databaseBuilder(applicationContext, AppDatabase::class.java, "database").build()
+        Room.databaseBuilder(applicationContext, AppDatabase::class.java, "menuDatabase").build()
     }
 
     private suspend fun fetchMenu(): List<MenuItemNetwork> {
