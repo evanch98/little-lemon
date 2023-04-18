@@ -12,6 +12,7 @@ import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -24,11 +25,13 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
 @Composable
-fun Home(navController: NavController) {
+fun Home(navController: NavController, database: AppDatabase) {
 
     var searchPhrase by remember {
         mutableStateOf("")
     }
+
+    val databaseMenuItems by database.menuItemDao().getAll().observeAsState(emptyList())
 
     Column(
         modifier = Modifier.fillMaxSize(),
