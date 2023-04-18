@@ -35,6 +35,14 @@ fun Home(navController: NavController, database: AppDatabase) {
 
     val databaseMenuItems by database.menuItemDao().getAll().observeAsState(emptyList())
 
+    var menuItems = if (searchPhrase.isNotEmpty()) {
+        databaseMenuItems.filter {
+            it.title.contains(searchPhrase, ignoreCase = true)
+        }
+    } else {
+        databaseMenuItems
+    }
+
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -140,7 +148,7 @@ fun Home(navController: NavController, database: AppDatabase) {
             textAlign = TextAlign.Left
         )
         Spacer(modifier = Modifier.height(30.dp))
-        MenuItemsList(items = databaseMenuItems)
+        MenuItemsList(items = menuItems)
     }
 }
 
