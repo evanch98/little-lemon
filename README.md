@@ -18,4 +18,7 @@ The capstone project from the Meta Android Developer Professional Certificate of
 - Filtering items
 
 # Sample Images
-<img src="./sample/onboarding_screen.png"  width="300">
+<img src="./sample/onboarding_screen.png" alt="Onboarding Screen"  width="300">
+<img src="./sample/home_screen.png" alt="Home Screen" width="300">
+<img src="./sample/home_screen_filtering.png" alt="Filtering menu items" width="300">
+<img src="./sample/profile_screen.png" alt="Profile Screen" width="300">
