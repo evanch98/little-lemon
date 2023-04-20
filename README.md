@@ -9,3 +9,10 @@ The capstone project from the Meta Android Developer Professional Certificate of
 - To fetch data from the server and parse JSON file
 - To store data in database (Room Database)
 - To allow users to items using search phrase and selection
+
+# Key Features
+- Wireframe
+- Onboarding Screen
+- Fetching data from the server and parsing JSON file
+- Room Database
+- Filtering items
