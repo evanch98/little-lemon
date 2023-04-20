@@ -16,3 +16,6 @@ The capstone project from the Meta Android Developer Professional Certificate of
 - Fetching data from the server and parsing JSON file
 - Room Database
 - Filtering items
+
+# Sample Images
+![Onboarding Screen](sample/onboarding_screen.png)
