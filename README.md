@@ -18,4 +18,4 @@ The capstone project from the Meta Android Developer Professional Certificate of
 - Filtering items
 
 # Sample Images
-<img src="./sample/onboarding_screen.png"  width="300" height="300">
+<img src="./sample/onboarding_screen.png"  width="300">
