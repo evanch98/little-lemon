@@ -1,6 +1,6 @@
 # meta_little_lemon
 Start Date: 14<sup>th</sup> March 2023 <br>
-The capstone project from the Meta Android Developer Professional Certificate offered by Meta and Coursera.
+The capstone project from the Meta Android Developer Professional Certificate offered by Meta and Coursera. The app is a food ordering app designed for Android mobile devices.
 
 # Goals
 - To showcase my knowledge of Kotlin, Jetpack Compose, and Android Development
