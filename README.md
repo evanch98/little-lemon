@@ -7,8 +7,8 @@ The capstone project from the Meta Android Developer Professional Certificate of
 - To apply principles of UI/UX in designing the app and wireframe
 - To design an onboarding process and a navigational flow that supports moving between screens
 - To fetch data from the server and parse JSON file
-- To store data in database (Room Database)
-- To allow users to items using search phrase and selection
+- To store data in a database (Room Database)
+- To allow users to filter items using search phrases and selection
 
 # Key Features
 - Wireframe
